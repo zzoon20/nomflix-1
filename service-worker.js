@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/nomflix/precache-manifest.807c35f692559b55031291ebdb16988a.js"
+  "/nomflix/precache-manifest.ed7be11432704b0ed595d16da4c164b6.js"
 );
 
 workbox.clientsClaim();

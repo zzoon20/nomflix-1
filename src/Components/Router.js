@@ -11,13 +11,13 @@ export default () => (
     <Router>
         <Header/>
         <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/tv" exact component={TV}/>
+            <Route path="/nomflix/" exact component={Home}/>
+            <Route path="/nomflix/tv" exact component={TV}/>
             {/* <Route path="/show/:id" exact component={TVDetail}/> */}
-            <Route path="/show/:id" exact component={Detail}/>
-            <Route path="/movie/:id" exact component={Detail}/>
-            <Route path="/search" exact component={Search}/>
-            <Redirect from="*" to="/"/>
+            <Route path="/nomflix/show/:id" exact component={Detail}/>
+            <Route path="/nomflix/movie/:id" exact component={Detail}/>
+            <Route path="/nomflix/search" exact component={Search}/>
+            <Redirect from="*" to="/nomflix"/>
         </Switch>
     </Router>  
 );

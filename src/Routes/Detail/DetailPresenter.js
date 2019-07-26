@@ -70,6 +70,13 @@ const Overview = styled.p`
     width: 50%;
 `;
 
+const Imdb = styled.img`
+    width: 25px;
+    height: 15px;
+    margin: -2px 0 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+`;
 
 const DetailPresenter = ({ result, loading, error }) =>(
     <>
@@ -126,6 +133,15 @@ const DetailPresenter = ({ result, loading, error }) =>(
                                     : `${genre.name}/`
                         )}
                     </Item>
+                    {result.imdb_id ? 
+                        <Item>
+                            <a href={`https://www.imdb.com/title/${result.imdb_id}`} target="_blank">
+                                <Imdb src={require('../../assets/imdb.svg')}/>
+                            </a>
+                        </Item> 
+                        : null
+                    }
+                    
                 </ItemContainer>
                 <Overview>
                     {result.overview}

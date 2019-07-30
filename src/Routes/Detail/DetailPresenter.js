@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
+import Section from 'Components/Section';
+// import Section from 'Components/Section';
 
 const Container = styled.div`
     height: calc(100vh - 50px);
@@ -68,6 +70,7 @@ const Overview = styled.p`
     opcacity: 0.7;
     line-height: 1.5;
     width: 50%;
+    margin-bottom: 20px;
 `;
 
 const Imdb = styled.img`
@@ -76,6 +79,11 @@ const Imdb = styled.img`
     margin: -2px 0 0 10px;
     display: inline-block;
     vertical-align: middle;
+`;
+
+const ProductCompany = styled.img`
+    width: 125px;
+
 `;
 
 const DetailPresenter = ({ result, loading, error }) =>(
@@ -104,9 +112,13 @@ const DetailPresenter = ({ result, loading, error }) =>(
             />
             <Data>
                 <Title>
-                    {result.original_title 
+                    {/* {result.original_title 
                         ? result.original_title 
-                        : result.original_name}
+                        : result.original_name} */}
+                    {/* {영문} */}
+                    {result.title 
+                        ? result.title 
+                        : result.name}
                     {/*
                         오리지널 타이틀이 있는지 확인해봐
                         있으면 오리지널 타이틀(movie)넣고
@@ -122,7 +134,11 @@ const DetailPresenter = ({ result, loading, error }) =>(
                     </Item>
                     <Divider>·</Divider>
                     <Item>
-                        {result.runtime ? result.runtime : result.episode_run_time[0]} min
+                        {result.runtime ? result.runtime : 
+                            result.episode_run_time ? result.episode_run_time[0] : '-'} min
+                        {/*
+                            조건 ? 참 : 거짓(조건 ? 참 : 거짓) min
+                        */}
                     </Item>
                     <Divider>·</Divider>
                     <Item>
@@ -133,19 +149,32 @@ const DetailPresenter = ({ result, loading, error }) =>(
                                     : `${genre.name}/`
                         )}
                     </Item>
-                    {result.imdb_id ? 
-                        <Item>
-                            <a href={`https://www.imdb.com/title/${result.imdb_id}`} target="_blank">
+                    <Item>
+                        {result.imdb_id ? 
+                            <a href={`https://www.imdb.com/title/${result.imdb_id}`} target="_blank" rel="noopener noreferrer">
                                 <Imdb src={require('../../assets/imdb.svg')}/>
                             </a>
-                        </Item> 
-                        : null
-                    }
-                    
+                            : null
+                        }
+                    </Item>
                 </ItemContainer>
                 <Overview>
                     {result.overview}
                 </Overview>
+                <Section title="Product Company">
+                    {result.production_companies && 
+                        result.production_companies.map((company, index) => 
+                            company.logo_path
+                            ?
+                            <ProductCompany
+                                src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                                key={company.id} 
+                                alt={company.name}
+                            />
+                            : <Item>{company.name}</Item>
+                        )
+                    }
+                </Section>
             </Data>
         </Content>
     </Container>

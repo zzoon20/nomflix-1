@@ -33,7 +33,9 @@ const HomePresenter = ({upcoming, popular, nowPlaying, loading, error}) => (
                         key={movie.id}
                         id={movie.id}
                         imageUrl={movie.poster_path}
-                        title={movie.original_title}
+                        // title={movie.original_title}
+                        // 영문
+                        title={movie.title}
                         rating={movie.vote_average}
                         year={movie.release_date.substring(0, 4)}
                         // substring 을 이용하여 원하는 만큼의 길이를 자른다.

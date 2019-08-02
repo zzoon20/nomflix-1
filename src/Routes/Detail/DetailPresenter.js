@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
 import Section from 'Components/Section';
+import VideoSection from 'Components/VideoSection';
 // import Section from 'Components/Section';
 
 const Container = styled.div`
@@ -170,9 +171,20 @@ const DetailPresenter = ({ result, loading, error }) =>(
                 <Overview>
                     {result.overview}
                 </Overview>
-                <Section>
-                    
-                </Section>
+                <VideoSection>
+                    {result.videos.results &&
+                        result.videos.results.map((video) =>
+                        <iframe 
+                            width="100%"
+                            src={`https://www.youtube.com/embed/${video.key}`}
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            title={video.name}>
+                        </iframe>        
+                        ) 
+                    }
+                </VideoSection>
                 <Section title="Product Company">
                     {result.production_companies && 
                         result.production_companies.map((company, index) => 

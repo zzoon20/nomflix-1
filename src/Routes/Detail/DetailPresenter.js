@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
 import Section from 'Components/Section';
@@ -86,6 +87,14 @@ const ProductCompany = styled.img`
 
 `;
 
+const SeasonPoster = styled.img`
+    width: 80px;
+`;
+
+const SeasonList = styled.div`
+    
+`;
+
 const DetailPresenter = ({ result, loading, error }) =>(
     <>
     <Helmet><title>Loading...</title></Helmet>
@@ -161,6 +170,9 @@ const DetailPresenter = ({ result, loading, error }) =>(
                 <Overview>
                     {result.overview}
                 </Overview>
+                <Section>
+                    
+                </Section>
                 <Section title="Product Company">
                     {result.production_companies && 
                         result.production_companies.map((company, index) => 
@@ -175,6 +187,46 @@ const DetailPresenter = ({ result, loading, error }) =>(
                         )
                     }
                 </Section>
+                {result.seasons &&
+                    result.seasons ? 
+                        <Section title="Seasons">
+                            {result.seasons && 
+                                result.seasons.map((season ,index) =>
+                                season.poster_path
+                                ?
+                                <SeasonList>
+                                    <SeasonPoster
+                                        src={`https://image.tmdb.org/t/p/w200${season.poster_path}`}
+                                    /><br/>
+                                    <Item>{season.name}</Item>
+                                </SeasonList>
+                                : <Item>{season.name}</Item>
+                                )
+                            }
+                        </Section>
+                    :
+                    null
+                }
+                {result.belongs_to_collection &&
+                    result.belongs_to_collection ? 
+                    <Link to={`/collections/${result.belongs_to_collection.id}`}>
+                        <Section title="Collections">
+                            {result.belongs_to_collection && 
+                                result.belongs_to_collection.poster_path
+                                ?
+                                <SeasonList>
+                                    <SeasonPoster
+                                        src={`https://image.tmdb.org/t/p/w200${result.belongs_to_collection.poster_path}`}
+                                    /><br/>
+                                    <Item>{result.belongs_to_collection.name}</Item>
+                                </SeasonList>
+                                : <Item>{result.belongs_to_collection.name}</Item>
+                            }
+                        </Section>
+                    </Link>
+                    :
+                    null
+                }
             </Data>
         </Content>
     </Container>

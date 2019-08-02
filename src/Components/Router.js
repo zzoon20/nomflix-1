@@ -6,6 +6,7 @@ import TV from 'Routes/TV';
 import Header from 'Components/Header';
 import Search from 'Routes/Search';
 import Detail from 'Routes/Detail';
+import Collections from 'Routes/Collections';
 // import TVDetail from 'Routes/TVDetail';
 
 export default () => (
@@ -33,6 +34,7 @@ export default () => (
             {/* <Route path="/show/:id" exact component={TVDetail}/> */}
             <Route path="/show/:id" exact component={Detail}/>
             <Route path="/movie/:id" exact component={Detail}/>
+            <Route path="/collections/:id" exact component={Collections}/>
             <Route path="/search" exact component={Search}/>
             <Redirect from="*" to="/"/>
         </Switch>

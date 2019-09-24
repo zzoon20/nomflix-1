@@ -7,6 +7,7 @@ import Header from 'Components/Header';
 import Search from 'Routes/Search';
 import Detail from 'Routes/Detail';
 import Collections from 'Routes/Collections';
+import SearchContextProvider from 'context';
 // import TVDetail from 'Routes/TVDetail';
 
 export default () => (
@@ -27,17 +28,19 @@ export default () => (
     // </Router>  
 
     <Router>
-        <Header/>
-        <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/tv" exact component={TV}/>
-            {/* <Route path="/show/:id" exact component={TVDetail}/> */}
-            <Route path="/show/:id" exact component={Detail}/>
-            <Route path="/movie/:id" exact component={Detail}/>
-            <Route path="/collections/:id" exact component={Collections}/>
-            <Route path="/search" exact component={Search}/>
-            <Redirect from="*" to="/"/>
-        </Switch>
+        <SearchContextProvider>
+            <Header/>
+            <Switch>
+                <Route path="/" exact component={Home}/>
+                <Route path="/tv" exact component={TV}/>
+                {/* <Route path="/show/:id" exact component={TVDetail}/> */}
+                <Route path="/show/:id" exact component={Detail}/>
+                <Route path="/movie/:id" exact component={Detail}/>
+                <Route path="/collections/:id" exact component={Collections}/>
+                <Route path="/search" exact component={Search}/>
+                <Redirect from="*" to="/"/>
+            </Switch>
+        </SearchContextProvider>
      </Router>  
 
 
